@@ -51,6 +51,12 @@ namespace LSOmni.Service
 
         #endregion
 
+        #region Altria
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        List<PublishedOffer> PublishedOffersGetByCardId2(string cardId, string itemId, string storeId);
+        #endregion
+
         #region Discount, Offers and GiftCards
 
         /// <summary>

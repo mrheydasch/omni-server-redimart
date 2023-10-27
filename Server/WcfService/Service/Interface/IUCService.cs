@@ -45,6 +45,11 @@ namespace LSOmni.Service
 
         #endregion
 
+        #region Altria
+        [OperationContract]
+        List<PublishedOffer> PublishedOffersGetByCardId2(string cardId, string itemId, string storeId);
+        #endregion
+
         #region Discount, Offers and GiftCards
 
         /// <summary>

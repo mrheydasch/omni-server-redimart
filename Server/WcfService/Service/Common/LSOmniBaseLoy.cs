@@ -731,12 +731,18 @@ namespace LSOmni.Service
 
             try
             {
+                logger.Debug(config.LSKey.Key, "PublishedOffersGetByCardId was called");
                 logger.Debug(config.LSKey.Key, "itemId:{0} cardId:{1}", itemId, cardId);
-
+                
                 OfferBLL bll = new OfferBLL(config, clientTimeOutInSeconds);
+                CustomLoyBLL customLoyBll = new CustomLoyBLL(config, clientTimeOutInSeconds);
+
                 List<PublishedOffer> list = bll.PublishedOffersGet(cardId, itemId, string.Empty, stat);
                 foreach (PublishedOffer it in list)
                 {
+                    logger.Debug(config.LSKey.Key, "PublishedOffersGetByCardId about to call AltriaLogEntryCreate");
+                    customLoyBll.AltriaLogEntryCreate("", it.Id, cardId, 2, 3);
+                    logger.Debug(config.LSKey.Key, "PublishedOffersGetByCardId returned from calling AltriaLogEntryCreate");
                     foreach (ImageView iv in it.Images)
                     {
                         iv.StreamURL = GetImageStreamUrl(iv);

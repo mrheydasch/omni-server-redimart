@@ -199,6 +199,7 @@
     <Compile Include="Loyalty\BaseLoyBLL.cs" />
     <Compile Include="Loyalty\ContactBLL.cs" />
     <Compile Include="Loyalty\CurrencyBLL.cs" />
+    <Compile Include="Loyalty\CustomLoyBLL.cs" />
     <Compile Include="Loyalty\ItemBLL.cs" />
     <Compile Include="Loyalty\MenuBLL.cs" />
     <Compile Include="Loyalty\OfferBLL.cs" />

@@ -6,5 +6,6 @@ namespace LSOmni.DataAccess.Interface.BOConnection
     {
         // Interface for NavCustom functions
         string MyCustomFunction(string data);
+
     }
 }
