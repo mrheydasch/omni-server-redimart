@@ -8,6 +8,8 @@ using System.Xml;
 using LSOmni.DataAccess.BOConnection.CentralPre.Dal;
 using LSOmni.DataAccess.Interface.BOConnection;
 using LSRetail.Omni.Domain.DataModel.Base;
+using System.Collections.Generic;
+using LSRetail.Omni.Domain.DataModel.Base.Retail;
 
 namespace LSOmni.DataAccess.BOConnection.CentralPre
 {
@@ -34,7 +36,7 @@ namespace LSOmni.DataAccess.BOConnection.CentralPre
             }
         }
 
-        #region Altria
+        #region Altria Phase I
         private const string CreateAltriaLogEntryRequestId = "CREATE_ALTRIA_LOG_ENTRY";
         private int base64ConversionMinLength = 1024 * 100; //50KB 75KB  minimum length to base64 conversion
         private string wsEncoding = "utf-8"; //default to utf-8
@@ -338,7 +340,14 @@ namespace LSOmni.DataAccess.BOConnection.CentralPre
             //LogXml(xmlRequest, xmlResponse, elapsedTime, logResponse);
             return xmlResponse;
         }
-        #endregion Altria
+        #endregion Altria Phase I
+
+        #region Altria Phase II
+        public virtual List<PublishedOffer> PublishedOffersGet(string cardId, string itemId, string storeId, Statistics stat)
+        {
+            return LSCentralWSBase.PublishedOffersGet2(cardId, itemId, storeId, stat);
+        }
+        #endregion Altria Phase II
 
     }
 }

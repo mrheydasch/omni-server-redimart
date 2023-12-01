@@ -33,7 +33,7 @@ namespace LSOmni.Service
                 OfferBLL bll = new OfferBLL(config, clientTimeOutInSeconds);
                 CustomLoyBLL customLoyBll = new CustomLoyBLL(config, clientTimeOutInSeconds);
 
-                List<PublishedOffer> list = bll.PublishedOffersGet(cardId, itemId, string.Empty, stat);
+                List<PublishedOffer> list = customLoyBll.PublishedOffersGet(cardId, itemId, string.Empty, stat);
                 foreach (PublishedOffer it in list)
                 {
                     logger.Debug(config.LSKey.Key, "PublishedOffersGetByCardId2 about to call AltriaLogEntryCreate");

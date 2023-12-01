@@ -34,10 +34,19 @@ namespace LSOmni.BLL.Loyalty
         {
         }
 
-        #region Altria
+        #region Altria Phase I
         public void AltriaLogEntryCreate(string storeId, string offerId, string cardId, int activityType, int channelType)
         {
+            //In Phase I we added ability to log impressions (seeing offer page) of altria api offers
             BOCustom.AltriaLogEntryCreate(storeId, offerId, cardId, activityType, channelType);
+        }
+        #endregion
+
+        #region Altria Phase II
+        public virtual List<PublishedOffer> PublishedOffersGet(string cardId, string itemId, string storeId, Statistics stat)
+        {
+            // In Phase II we made our own published offer function, to filter the published altria offers in case user is not age verified yet
+            return BOCustom.PublishedOffersGet(cardId, itemId, storeId, stat);
         }
         #endregion
     }
