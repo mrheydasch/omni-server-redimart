@@ -242,6 +242,7 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
             return sc;
         }
 
+        //this is a registered user logon
         public MemberContact MapFromRootToLogonContact(LSCentral.RootMemberLogon root, decimal pointBalance)
         {
             if (root.MemberContact == null)
@@ -343,6 +344,7 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
             return memberContact;
         }
 
+        //this is a social media logon
         public MemberContact MapFromRootToLogonAuth(LSCentral.RootMemberauthLogin root, decimal pointBalance)
         {
             if (root.MemberContact == null)
@@ -421,8 +423,10 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
             {
                 foreach (LSCentral.MemberAttributeList2 attr in root.MemberAttributeList)
                 {
+                    // if the key and value of the attribute is same, it is a published offer, not a normal memeber attribute.
+                    //Thus it should not be included - anmo 12/1/2023 Phase II
                     if (attr.Type != "0" || (attr.AttributeType != "0" && attr.AttributeType != "4") 
-                        || (attr.AttributeType == "0" && attr.Code.ToUpper().Equals(attr.Value.ToUpper())) )
+                        || (attr.AttributeType == "0" && attr.Code.ToUpper().Equals(attr.Value.ToUpper())) ) //anmo
                         continue;
 
                     Profile pro = new Profile()
@@ -643,6 +647,8 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
         #endregion
 
         #region Altria Phase II
+        //a copy of original mapping
+        //duplication but might be better to have ours separate
         public List<PublishedOffer> MapFromRootToPublishedOffers(OmniWrapper2.RootGetDirectMarketingInfo root)
         {
             List<PublishedOffer> list = new List<PublishedOffer>();
@@ -668,6 +674,8 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
             return list;
         }
 
+        //a copy of original mapping
+        //duplication but might be better to have ours separate
         private List<ImageView> GetPublishedOfferImages(OmniWrapper2.PublishedOfferImages[] imgs, string offerId)
         {
             List<ImageView> list = new List<ImageView>();
@@ -688,6 +696,8 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
             return list;
         }
 
+        //a copy of original mapping
+        //duplication but might be better to have ours separate
         private List<OfferDetails> GetPublishedOfferDetails(OmniWrapper2.RootGetDirectMarketingInfo root, string offerId)
         {
             List<OfferDetails> list = new List<OfferDetails>();
@@ -713,6 +723,8 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
             return list;
         }
 
+        //a copy of original mapping
+        //duplication but might be better to have ours separate
         private List<PublishedOfferLine> GetPublishedOfferLines(OmniWrapper2.PublishedOfferLine[] lines, string offerId)
         {
             List<PublishedOfferLine> list = new List<PublishedOfferLine>();
