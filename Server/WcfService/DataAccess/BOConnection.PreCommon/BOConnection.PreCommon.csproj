@@ -99,6 +99,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\OmniWrapper2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="XmlMapping\BaseXml.cs" />
     <Compile Include="XmlMapping\Loyalty\AdvertisementXml.cs" />
     <Compile Include="XmlMapping\Loyalty\NavXml.cs" />
@@ -510,6 +515,14 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\OmniWrapper2\OmniWrapper2.wsdl" />
+    <None Include="Web References\OmniWrapper2\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\OmniWrapper2\RootGetDirectMarketingInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Common\Core\Activity\Domain.DataModel.Activity\Domain.DataModel.Activity.csproj">
@@ -586,6 +599,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>LSOmni_DataAccess_BOConnection_PreCommon_LSActivity15_Activity</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:7147/LS22-2-W1_ws/WS/Codeunit/OmniWrapper2">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\OmniWrapper2\</RelPath>
+      <UpdateFromURL>http://localhost:7147/LS22-2-W1_ws/WS/Codeunit/OmniWrapper2</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>LSOmni_DataAccess_BOConnection_PreCommon_OmniWrapper2_OmniWrapper2</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

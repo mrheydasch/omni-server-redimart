@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/OmniWrapper2" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/OmniWrapper2" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50000" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50000" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="PublishedOffer">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DiscountType" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DiscountNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="OfferCategory" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PrimaryText" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SecondaryText" type="string" />
+          <element minOccurs="0" maxOccurs="1" default="0001-01-01" name="EndingDate" type="date" />
+        </sequence>
+      </complexType>
+      <complexType name="PublishedOfferImages">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="KeyValue" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="DisplayOrder" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="ImageId" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="PublishedOfferDetailLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="OfferNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="LineNo" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="PublishedOfferDetailLineImages">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="KeyValue" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="DisplayOrder" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="ImageId" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="MemberCouponBuffer">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="CouponCode" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Description" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="Barcode" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="MemberNotification">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="ContactNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="PrimaryText" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="SecondaryText" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="WhenDisplay" type="string" />
+          <element minOccurs="0" maxOccurs="1" default="0001-01-01" name="ValidFromDate" type="date" />
+          <element minOccurs="0" maxOccurs="1" default="0001-01-01" name="ValidToDate" type="date" />
+          <element minOccurs="1" maxOccurs="1" name="MemberAttribute" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="MemberAttributeValue" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="WebLink" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="E-MailDisclaimer" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="false" name="PersonalizedE-Mail" type="boolean" />
+          <element minOccurs="1" maxOccurs="1" default="false" name="SendHTML" type="boolean" />
+        </sequence>
+      </complexType>
+      <complexType name="MemberNotificationImages">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="KeyValue" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="DisplayOrder" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="ImageId" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="PublishedOfferLine">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="PublishedOfferNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DiscountType" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DiscountNo" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="DiscountLineNo" type="int" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="DiscountLineType" type="int" />
+          <element minOccurs="1" maxOccurs="1" name="DiscountLineId" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="DiscountLineDescription" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="VariantType" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="VariantCode" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="false" name="Exclude" type="boolean" />
+          <element minOccurs="1" maxOccurs="1" name="UnitOfMeasure" type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="TableNo" type="int" />
+        </sequence>
+      </complexType>
+      <complexType name="RootGetDirectMarketingInfo" mixed="true">
+        <sequence>
+          <element minOccurs="0" maxOccurs="unbounded" name="PublishedOffer" type="tns:PublishedOffer" />
+          <element minOccurs="0" maxOccurs="unbounded" name="PublishedOfferImages" type="tns:PublishedOfferImages" />
+          <element minOccurs="0" maxOccurs="unbounded" name="PublishedOfferDetailLine" type="tns:PublishedOfferDetailLine" />
+          <element minOccurs="0" maxOccurs="unbounded" name="PublishedOfferDetailLineImages" type="tns:PublishedOfferDetailLineImages" />
+          <element minOccurs="0" maxOccurs="unbounded" name="MemberCouponBuffer" type="tns:MemberCouponBuffer" />
+          <element minOccurs="0" maxOccurs="unbounded" name="MemberNotification" type="tns:MemberNotification" />
+          <element minOccurs="0" maxOccurs="unbounded" name="MemberNotificationImages" type="tns:MemberNotificationImages" />
+          <element minOccurs="0" maxOccurs="unbounded" name="PublishedOfferLine" type="tns:PublishedOfferLine" />
+        </sequence>
+      </complexType>
+      <element name="RootGetDirectMarketingInfo" type="tns:RootGetDirectMarketingInfo" />
+    </schema>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/OmniWrapper2" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="GetDirectMarketingInfo">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="cardId" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="itemNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="storeNo" type="string" />
+            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50000" minOccurs="1" maxOccurs="1" name="loadMemberDirMarkInfoXML" type="q1:RootGetDirectMarketingInfo" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetDirectMarketingInfo_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="responseCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
+            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50000" minOccurs="1" maxOccurs="1" name="loadMemberDirMarkInfoXML" type="q2:RootGetDirectMarketingInfo" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="GetDirectMarketingInfo">
+    <part name="parameters" element="tns:GetDirectMarketingInfo" />
+  </message>
+  <message name="GetDirectMarketingInfo_Result">
+    <part name="parameters" element="tns:GetDirectMarketingInfo_Result" />
+  </message>
+  <portType name="OmniWrapper2_Port">
+    <operation name="GetDirectMarketingInfo">
+      <input name="GetDirectMarketingInfo" message="tns:GetDirectMarketingInfo" />
+      <output name="GetDirectMarketingInfo_Result" message="tns:GetDirectMarketingInfo_Result" />
+    </operation>
+  </portType>
+  <binding name="OmniWrapper2_Binding" type="tns:OmniWrapper2_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GetDirectMarketingInfo">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/OmniWrapper2:GetDirectMarketingInfo" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetDirectMarketingInfo">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetDirectMarketingInfo_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="OmniWrapper2">
+    <port name="OmniWrapper2_Port" binding="tns:OmniWrapper2_Binding">
+      <address location="http://localhost:7147/LS22-2-W1_ws/WS/CRONUS%20-%20LS%20Central/Codeunit/OmniWrapper2" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

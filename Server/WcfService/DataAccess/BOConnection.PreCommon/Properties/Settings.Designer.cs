@@ -12,7 +12,7 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -86,6 +86,17 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Properties {
         public string LSOmni_DataAccess_BOConnection_PreCommon_LSOData_ODataRequest {
             get {
                 return ((string)(this["LSOmni_DataAccess_BOConnection_PreCommon_LSOData_ODataRequest"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8177/LS22-2-W1_test/WS/CRONUS%20-%20LS%20Central/Codeunit/OmniWr" +
+            "apper2")]
+        public string LSOmni_DataAccess_BOConnection_PreCommon_OmniWrapper2_OmniWrapper2 {
+            get {
+                return ((string)(this["LSOmni_DataAccess_BOConnection_PreCommon_OmniWrapper2_OmniWrapper2"]));
             }
         }
     }

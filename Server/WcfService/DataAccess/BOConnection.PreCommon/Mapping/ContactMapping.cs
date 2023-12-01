@@ -7,6 +7,7 @@ using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Members;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using LSRetail.Omni.Domain.DataModel.Base;
+using LSRetail.Omni.Domain.DataModel.Base.OmniTasks;
 
 namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
 {
@@ -319,7 +320,10 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
             {
                 foreach (LSCentral.MemberAttributeList3 attr in root.MemberAttributeList)
                 {
-                    if (attr.Type != "0" || (attr.AttributeType != "0" && attr.AttributeType != "4"))
+                    // if the key and value of the attribute is same, it is a published offer, not a normal memeber attribute.
+                    //Thus it should not be included - anmo 12/1/2023 Phase II
+                    if (attr.Type != "0" || (attr.AttributeType != "0" && attr.AttributeType != "4")
+                        || (attr.AttributeType == "0" && attr.Code.ToUpper().Equals(attr.Value.ToUpper())))  //anmo
                         continue;
 
                     Profile pro = new Profile()
@@ -417,7 +421,8 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
             {
                 foreach (LSCentral.MemberAttributeList2 attr in root.MemberAttributeList)
                 {
-                    if (attr.Type != "0" || (attr.AttributeType != "0" && attr.AttributeType != "4"))
+                    if (attr.Type != "0" || (attr.AttributeType != "0" && attr.AttributeType != "4") 
+                        || (attr.AttributeType == "0" && attr.Code.ToUpper().Equals(attr.Value.ToUpper())) )
                         continue;
 
                     Profile pro = new Profile()
@@ -633,6 +638,106 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon.Mapping
                     }
             }
             return (OfferDiscountLineType)discountLineType;
+        }
+
+        #endregion
+
+        #region Altria Phase II
+        public List<PublishedOffer> MapFromRootToPublishedOffers(OmniWrapper2.RootGetDirectMarketingInfo root)
+        {
+            List<PublishedOffer> list = new List<PublishedOffer>();
+            if (root.PublishedOffer == null)
+                return list;
+
+            foreach (OmniWrapper2.PublishedOffer offer in root.PublishedOffer)
+            {
+                list.Add(new PublishedOffer()
+                {
+                    Id = offer.No,
+                    Description = offer.PrimaryText,
+                    Details = offer.SecondaryText,
+                    ExpirationDate = ConvertTo.SafeJsonDate(offer.EndingDate, IsJson),
+                    OfferId = offer.DiscountNo,
+                    Code = (OfferDiscountType)Convert.ToInt32(offer.DiscountType),
+                    Type = (OfferType)Convert.ToInt32(offer.OfferCategory),
+                    Images = GetPublishedOfferImages(root.PublishedOfferImages, offer.No),
+                    OfferDetails = GetPublishedOfferDetails(root, offer.No),
+                    OfferLines = GetPublishedOfferLines(root.PublishedOfferLine, offer.No)
+                });
+            }
+            return list;
+        }
+
+        private List<ImageView> GetPublishedOfferImages(OmniWrapper2.PublishedOfferImages[] imgs, string offerId)
+        {
+            List<ImageView> list = new List<ImageView>();
+            if (imgs == null)
+                return list;
+
+            foreach (OmniWrapper2.PublishedOfferImages img in imgs)
+            {
+                if (img.KeyValue == offerId)
+                {
+                    list.Add(new ImageView()
+                    {
+                        Id = img.ImageId,
+                        DisplayOrder = img.DisplayOrder
+                    });
+                }
+            }
+            return list;
+        }
+
+        private List<OfferDetails> GetPublishedOfferDetails(OmniWrapper2.RootGetDirectMarketingInfo root, string offerId)
+        {
+            List<OfferDetails> list = new List<OfferDetails>();
+            if (root.PublishedOfferDetailLine == null)
+                return list;
+
+            foreach (OmniWrapper2.PublishedOfferDetailLine line in root.PublishedOfferDetailLine)
+            {
+                if (line.OfferNo == offerId)
+                {
+                    OfferDetails det = new OfferDetails()
+                    {
+                        Description = line.Description,
+                        LineNumber = line.LineNo.ToString(),
+                        OfferId = line.OfferNo
+                    };
+                    if (root.PublishedOfferDetailLineImages != null)
+                        det.Image = new ImageView(root.PublishedOfferDetailLineImages.FirstOrDefault(x => x.KeyValue == offerId)?.ImageId);
+
+                    list.Add(det);
+                }
+            }
+            return list;
+        }
+
+        private List<PublishedOfferLine> GetPublishedOfferLines(OmniWrapper2.PublishedOfferLine[] lines, string offerId)
+        {
+            List<PublishedOfferLine> list = new List<PublishedOfferLine>();
+            if (lines == null)
+                return list;
+
+            foreach (OmniWrapper2.PublishedOfferLine line in lines.Where(x => x.PublishedOfferNo == offerId))
+            {
+                OfferDiscountType discountType = (OfferDiscountType)Convert.ToInt32(line.DiscountType);
+                list.Add(new PublishedOfferLine()
+                {
+                    Id = line.DiscountLineId,
+                    OfferId = line.PublishedOfferNo,
+                    DiscountId = line.DiscountNo,
+                    DiscountType = discountType,
+                    LineType = GetOfferDiscountLineType(discountType, line.DiscountLineType),
+                    Description = line.DiscountLineDescription,
+                    LineNo = line.DiscountLineNo,
+                    VariantType = (OfferLineVariantType)Convert.ToInt32(line.VariantType),
+                    Variant = line.VariantCode,
+                    Exclude = line.Exclude,
+                    UnitOfMeasure = line.UnitOfMeasure
+                });
+            }
+            return list;
         }
 
         #endregion
