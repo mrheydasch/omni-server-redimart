@@ -56,7 +56,7 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon
         #endregion Altria Phase II
 
         #region AgeChecker
-        public async Task<string> AgeVerifyAsync(
+        public async Task<List<string>> AgeVerifyAsync(
             Statistics stat,
             string IDNameFirst,
             string IDNameLast,
@@ -130,11 +130,12 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon
             logger.Debug(config.LSKey.Key, "AgeVerifyAsync(): ResultsUploadType: {0}", ResultsUploadType);
             logger.Debug(config.LSKey.Key, "AgeVerifyAsync(): ResultsUUID: {0}", ResultsUUID);
             logger.Debug(config.LSKey.Key, "AgeVerifyAsync(): ResultsBlocked: {0}", ResultsBlocked);
+            List <string> data = new List<string> { ResultsUUID, response.StatusCode.ToString(), ResultsStatus, ResultsErrorCode, ResultsErrorMsg };
             logger.StatisticEndSub(ref stat, index);
-            return ResultsUUID + ", " + ResultsStatus + ", " + response.StatusCode.ToString() + ", " + ResultsErrorCode + ", " + ResultsErrorMsg;
+            return data;
         }
 
-        public async Task<string> AgeVerifyCheckResultAsync(Statistics stat, string UUID)
+        public async Task<List<string>> AgeVerifyCheckResultAsync(Statistics stat, string UUID)
         {
             string ResultsErrorCode = string.Empty,
                 ResultsErrorMsg = string.Empty,
@@ -170,8 +171,9 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon
             logger.Debug(config.LSKey.Key, "AgeVerifyGetValues: ResultsBlocked: {0}", ResultsBlocked);
             logger.Debug(config.LSKey.Key, "AgeVerifyGetValues: result.StatusCode.ToString(): {0}", response.StatusCode.ToString());
             logger.Debug(config.LSKey.Key, "AgeVerifyCheckResultAsync(): end");
+            List<string> data = new List<string> { ResultsUUID, response.StatusCode.ToString(), ResultsStatus, ResultsErrorCode, ResultsErrorMsg };
             logger.StatisticEndSub(ref stat, index);
-            return ResultsUUID + ", " + ResultsStatus + ", " + response.StatusCode.ToString() + ", " + ResultsErrorCode + ", " + ResultsErrorMsg;
+            return data;
         }
 
         public void AgeVerifyGetValues(
@@ -204,7 +206,7 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon
                 }
                 catch
                 {
-                    ResultsErrorCode = "";
+                    ResultsErrorCode = string.Empty;
                 }
                 try
                 {
@@ -212,7 +214,7 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon
                 }
                 catch
                 {
-                    ResultsErrorMsg = "";
+                    ResultsErrorMsg = string.Empty;
                 }
                 try
                 {
@@ -220,7 +222,7 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon
                 }
                 catch
                 {
-                    ResultsStatus = "";
+                    ResultsStatus = string.Empty;
                 }
                 try
                 {
@@ -228,7 +230,7 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon
                 }
                 catch
                 {
-                    ResultsUploadType = "";
+                    ResultsUploadType = string.Empty;
                 }
                 try
                 {
@@ -236,7 +238,7 @@ namespace LSOmni.DataAccess.BOConnection.PreCommon
                 }
                 catch
                 {
-                    ResultsUUID = "";
+                    ResultsUUID = string.Empty;
                 }
             }
             catch (Exception e)
